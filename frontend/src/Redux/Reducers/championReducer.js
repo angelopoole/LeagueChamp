@@ -1,21 +1,21 @@
 import {
 	GET_ALL_CHAMPIONS_REQUEST,
 	GET_ALL_CHAMPIONS_SUCCESS,
-	GET_CHAMPION_BY_ID,
 	GET_ALL_CHAMPIONS_FAIL,
+	GET_CHAMPION_BY_ID_REQUEST,
+	GET_CHAMPION_BY_ID_SUCCESS,
+	GET_CHAMPION_BY_ID_FAIL,
 } from '../Consonants/championConsonants';
 
 let initialState = {
 	champions: [],
 };
 
-const championReducer = (state = initialState, { type, payload }) => {
+export const championReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case GET_ALL_CHAMPIONS_REQUEST:
-			console.log(payload);
 			return { loading: true, champions: [] };
 		case GET_ALL_CHAMPIONS_SUCCESS:
-			console.log(payload);
 			return { loading: false, champions: payload };
 		case GET_ALL_CHAMPIONS_FAIL:
 			return { loafing: false, error: payload };
@@ -24,4 +24,19 @@ const championReducer = (state = initialState, { type, payload }) => {
 	}
 };
 
-export default championReducer;
+export const championDetailsReducer = (
+	state = { currentChamp: {} },
+	{ type, payload }
+) => {
+	switch (type) {
+		case GET_CHAMPION_BY_ID_REQUEST:
+			return { loading: true, currentChamp: {} };
+		case GET_CHAMPION_BY_ID_SUCCESS:
+			return { loading: false, currentChamp: payload };
+		case GET_CHAMPION_BY_ID_FAIL:
+			return { loading: false, error: payload };
+
+		default:
+			return state;
+	}
+};
