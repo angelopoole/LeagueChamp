@@ -12,7 +12,8 @@ const getAllChampionData = async (req, res) => {
 	let data = await axios.get(
 		'http://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/champion.json'
 	);
-
+	// console.log('hit');
+	// console.log(data.data);
 	res.send(data.data.data);
 };
 

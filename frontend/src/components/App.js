@@ -1,5 +1,5 @@
 //libs
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 //components
 import Layout from './Layout';
@@ -7,15 +7,14 @@ import HomeScreen from '../pages/HomeScreen';
 
 //redux
 import { getAllChampions } from '../Redux/Actions/championAction';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function App() {
 	const dispatch = useDispatch();
-	const champions = useSelector(state => state.championReducer);
 
 	useEffect(() => {
 		dispatch(getAllChampions());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<Layout>

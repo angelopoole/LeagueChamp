@@ -5,7 +5,7 @@ import championReducer from './championReducer';
 
 // using the name of the reducer to seperate state containers
 const state = {
-	championReducer: championReducer,
+	champions: championReducer,
 };
 
 export default combineReducers(state);
