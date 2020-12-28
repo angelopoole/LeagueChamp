@@ -18,7 +18,7 @@ export const championReducer = (state = initialState, { type, payload }) => {
 		case GET_ALL_CHAMPIONS_SUCCESS:
 			return { loading: false, champions: payload };
 		case GET_ALL_CHAMPIONS_FAIL:
-			return { loafing: false, error: payload };
+			return { loading: false, error: payload };
 		default:
 			return state;
 	}

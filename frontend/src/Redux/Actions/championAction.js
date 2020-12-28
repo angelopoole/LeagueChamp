@@ -14,7 +14,6 @@ export const getAllChampions = () => {
 		try {
 			dispatch({ type: GET_ALL_CHAMPIONS_REQUEST });
 			let res = await axios.get('api/datadragon/champions/');
-
 			let newArrayDataOfOjbect = Object.values(res.data);
 
 			dispatch({
@@ -37,9 +36,12 @@ export const getChampionById = id => {
 	return async dispatch => {
 		try {
 			dispatch({ type: GET_CHAMPION_BY_ID_REQUEST });
+			let res = await axios.get(`/api/datadragon/champions/${id}`);
 
-			let req = await axios.get(`api/datadragon/champions/${id}`);
-			dispatch({ type: GET_CHAMPION_BY_ID_SUCCESS, payload: req });
+			let key = Object.keys(res.data)[0];
+			let formattedData = res.data[key];
+
+			dispatch({ type: GET_CHAMPION_BY_ID_SUCCESS, payload: formattedData });
 		} catch (error) {
 			dispatch({
 				type: GET_CHAMPION_BY_ID_FAIL,

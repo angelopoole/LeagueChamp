@@ -1,22 +1,61 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Col, Row } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Col, Form, Row } from 'react-bootstrap';
 import ChampionCard from '../components/ChampionCard';
+import Loader from '../components/Loader';
+import { getAllChampions } from '../Redux/Actions/championAction';
 
 const HomeScreen = () => {
-	const champions = useSelector(state => state.champions.champions);
-	// const { loading, error, champions } = champions;
-	// console.log(champions);
+	const dispatch = useDispatch();
+	const champs = useSelector(state => state.champions);
+	const [filter, setFilter] = useState('');
+
+	useEffect(() => {
+		dispatch(getAllChampions());
+	}, [dispatch]);
+
+	let { error, loading, champions } = champs;
+
+	// console.log(filter);
+	const filterChampsHandler = e => {
+		setFilter(([e.target.name] = e.target.value));
+	};
+
+	let filterOutChampions = champions.filter(champ =>
+		champ.name.toLowerCase().includes(filter.toLowerCase())
+	);
+
+	// filterOutChampions;
+
 	return (
 		<div>
+			<Form style={{ marginTop: '15px' }}>
+				<Form.Row>
+					<Col>
+						<Form.Control
+							placeholder='Search Champs'
+							name='filter'
+							onChange={e => filterChampsHandler(e)}
+						/>
+					</Col>
+				</Form.Row>
+			</Form>
 			<main>
-				<Row>
-					{champions.map(champion => (
-						<Col key={champion.id} sm={12} md={6} lg={4} xl={3}>
-							<ChampionCard champion={champion} />
-						</Col>
-					))}
-				</Row>
+				{loading ? (
+					<Loader>loader: {loading}...</Loader>
+				) : error ? (
+					<div> message: {error}! </div>
+				) : (
+					<>
+						<Row>
+							{filterOutChampions.map(champion => (
+								<Col key={champion.id} sm={12} md={6} lg={4} xl={3}>
+									<ChampionCard champion={champion} />
+								</Col>
+							))}
+						</Row>
+					</>
+				)}
 			</main>
 		</div>
 	);

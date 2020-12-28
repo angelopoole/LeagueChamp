@@ -1,6 +1,7 @@
-import React from 'react';
 import { Card, Container } from 'react-bootstrap';
 import styled from 'styled-components';
+
+import { LinkContainer } from 'react-router-bootstrap';
 
 const TransparentContainer = styled(Container)`
 	background-color: rgba(203, 235, 235, 0.59);
@@ -9,35 +10,61 @@ const TransparentContainer = styled(Container)`
 `;
 
 const HoverContainer = styled(Container)`
-	#wholeCard:hover {
+	#wholeCard {
+		transition: var(--transition);
 		#transContainer {
+			transition: var(--transition);
+			filter: blur(5px);
+		}
+	}
+
+	#wholeCard:hover {
+		transition: var(--transition);
+		box-shadow: 5px 10px 13px var(--cyan);
+		#transContainer {
+			transition: var(--transition);
 			background-color: transparent;
 			color: transparent;
-			cursor: pointer;
+			/* cursor: pointer; */
 		}
 	}
 `;
 
-// http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg
+// @TODO
+// figure out a way to generate an overlay trigger that gives info on a champion
+const ChampionCard = ({ champion, match }) => {
+	const {
+		blurb,
+		id,
+		// image,
+		// info,
+		// key,
+		name,
+		// partype,
+		// stats,
+		// tags,
+		title,
+		// version,
+	} = champion;
 
-const ChampionCard = ({ champion }) => {
-	console.log(champion);
 	return (
-		<HoverContainer>
-			<Card className='p-3 m-3' border='secondary' id='wholeCard'>
-				<Card.Img
-					className='img'
-					src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`}
-				/>
-				<Card.ImgOverlay>
-					<TransparentContainer fluid id='transContainer'>
-						<Card.Title className='h1'>{champion.name}</Card.Title>
-						<Card.Body>{champion.blurb}</Card.Body>
-						<Card.Subtitle>{champion.title}</Card.Subtitle>
-					</TransparentContainer>
-				</Card.ImgOverlay>
-			</Card>
-		</HoverContainer>
+		<LinkContainer to={`champion/${id}`}>
+			<HoverContainer>
+				<Card className='p-3 m-3' border='secondary' id='wholeCard'>
+					<Card.Img
+						className='img'
+						src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`}
+					/>
+					<Card.ImgOverlay>
+						<TransparentContainer fluid id='transContainer'>
+							<Card.Title className='h1'>{name}</Card.Title>
+							<Card.Body>{blurb}</Card.Body>
+							<Card.Subtitle>{title}</Card.Subtitle>
+						</TransparentContainer>
+					</Card.ImgOverlay>
+				</Card>
+			</HoverContainer>
+		</LinkContainer>
 	);
 };
 
