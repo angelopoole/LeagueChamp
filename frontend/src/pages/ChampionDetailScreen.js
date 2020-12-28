@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 
+//comp
+import { Container, Image } from 'react-bootstrap';
+
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { getChampionById } from '../Redux/Actions/championAction';
@@ -15,14 +18,15 @@ const ChampionDetailScreen = ({ match }) => {
 	let currentChampion = useSelector(state => state.championDetails);
 	let { error, loading, currentChamp } = currentChampion;
 
-	// let key = Object.keys(currentChamp)[0]
-	// let instanceChamp = currentChamp[key];
 	console.log(currentChamp.name);
 
-	// var newArrayDataOfOjbect = Object.values(data)
-	// let newchamparr = Object.values(Object.keys(currentChamp)[0]);
-
-	return <div> champion detail</div>;
+	return (
+		<Container>
+			<Container>
+				<Image src={``} rounded />
+			</Container>
+		</Container>
+	);
 };
 
 export default ChampionDetailScreen;

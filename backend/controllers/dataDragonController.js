@@ -12,9 +12,10 @@ const getAllChampionData = async (req, res) => {
 	let data = await axios.get(
 		'http://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/champion.json'
 	);
-	// console.log('hit');
-	// console.log(data.data);
-	res.send(data.data.data);
+
+	let newArrayDataOfOjbect = Object.values(data.data.data);
+
+	res.send(newArrayDataOfOjbect);
 };
 
 //@desc     Get one champion
@@ -22,12 +23,23 @@ const getAllChampionData = async (req, res) => {
 //@access   public
 
 const getChampionById = async (req, res) => {
-	let champIdCapitalized =
-		req.params.id[0].toUpperCase() + req.params.id.slice(1);
+	console.log('hit');
+	try {
+		let champIdCapitalized =
+			(await req.params.id[0].toUpperCase()) + req.params.id.slice(1);
+		// console.log(req);
+		let { data } = await axios.get(
+			`http://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/champion/${champIdCapitalized}.json`
+		);
 
-	let data = await axios.get(
-		`http://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/champion/${champIdCapitalized}.json`
-	);
+		let key = Object.keys(data.data)[0];
+		let formattedData = data.data[key];
+		console.log(formattedData);
+
+		res.send(formattedData);
+	} catch (error) {
+		console.log(error);
+	}
 
 	res.send(data.data);
 };
