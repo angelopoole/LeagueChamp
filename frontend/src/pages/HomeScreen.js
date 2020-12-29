@@ -9,14 +9,14 @@ const HomeScreen = () => {
 	const dispatch = useDispatch();
 	const champs = useSelector(state => state.champions);
 	const [filter, setFilter] = useState('');
-
-	useEffect(() => {
-		dispatch(getAllChampions());
-	}, [dispatch]);
-
 	let { error, loading, champions } = champs;
 
-	// console.log(filter);
+	useEffect(() => {
+		if (champions.length === 0) {
+			dispatch(getAllChampions());
+		}
+	}, [dispatch, champions.length]);
+
 	const filterChampsHandler = e => {
 		setFilter(([e.target.name] = e.target.value));
 	};
@@ -24,8 +24,6 @@ const HomeScreen = () => {
 	let filterOutChampions = champions.filter(champ =>
 		champ.name.toLowerCase().includes(filter.toLowerCase())
 	);
-
-	// filterOutChampions;
 
 	return (
 		<div>

@@ -25,12 +25,12 @@ export const championReducer = (state = initialState, { type, payload }) => {
 };
 
 export const championDetailsReducer = (
-	state = { currentChamp: {} },
+	state = { currentChamp: { skins: [] } },
 	{ type, payload }
 ) => {
 	switch (type) {
 		case GET_CHAMPION_BY_ID_REQUEST:
-			return { loading: true, currentChamp: {} };
+			return { loading: true, currentChamp: { skins: [] } };
 		case GET_CHAMPION_BY_ID_SUCCESS:
 			return { loading: false, currentChamp: payload };
 		case GET_CHAMPION_BY_ID_FAIL:

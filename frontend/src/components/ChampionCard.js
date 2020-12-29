@@ -14,7 +14,7 @@ const HoverContainer = styled(Container)`
 		transition: var(--transition);
 		#transContainer {
 			transition: var(--transition);
-			filter: blur(5px);
+			/* filter: blur(5px); */
 		}
 	}
 
