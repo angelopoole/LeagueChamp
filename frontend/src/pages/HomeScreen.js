@@ -45,9 +45,9 @@ const HomeScreen = () => {
 					<div> message: {error}! </div>
 				) : (
 					<>
-						<Row>
+						<Row sm={2}>
 							{filterOutChampions.map(champion => (
-								<Col key={champion.id} sm={12} md={6} lg={4} xl={3}>
+								<Col key={champion.id} sm={1} md={6} lg={4} xl={3}>
 									<ChampionCard champion={champion} />
 								</Col>
 							))}
