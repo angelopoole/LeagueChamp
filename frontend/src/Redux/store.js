@@ -5,7 +5,7 @@ import rootReducer from './Reducers/rootReducer';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = applyMiddleware(thunk);
 
-let store = createStore(rootReducer, composeEnhancers(middleware));
+const store = createStore(rootReducer, composeEnhancers(middleware));
 
 export default store;
 
@@ -16,17 +16,17 @@ export default store;
 // dispatch the action in, import, then you would go ahead and dispatch the function from action including the arguments needed.
 // from inside the action you'll want to dispatch the type and the payload.
 
-//COMPONENT
+// COMPONENT
 // import addNumToCounter
 // onClick(() => dispatch(addNumToCounter(num)))
 
-//ACTION.JS
+// ACTION.JS
 // import (ADD_NUMBER) from 'consonants/types'
 //
 // export const addNumToCounter = (num) => {return async dispatch=> {do somethin... dispatch({type: ADD_ NUMBER, payload: result}) }}
 //
 //
-//REDUCER.JS
+// REDUCER.JS
 // switch(type)
 //    case(ADD_NUMBER)
 //      return{...state, counter: payload}

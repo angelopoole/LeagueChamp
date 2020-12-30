@@ -1,7 +1,8 @@
-//libs
+// libs
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React from 'react';
 
-//components
+// components
 import Layout from './Layout';
 import HomeScreen from '../pages/HomeScreen';
 import ChampionDetailScreen from '../pages/ChampionDetailScreen';

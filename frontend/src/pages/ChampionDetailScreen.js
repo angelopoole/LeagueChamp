@@ -1,13 +1,14 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-//comp
+// comp
 import { Image, Carousel, Container } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import Loader from '../components/Loader';
 
-//redux
-import { useSelector, useDispatch } from 'react-redux';
+// redux
 import { getChampionById } from '../Redux/Actions/championAction';
-import styled from 'styled-components';
 
 // styled Components
 const StyledImageContainer = styled(Image)`
@@ -22,8 +23,8 @@ const StyledImageContainer = styled(Image)`
 const ChampionDetailScreen = ({ match }) => {
   const dispatch = useDispatch();
   const paramsChampId = match.params.id;
-  let currentChampion = useSelector(state => state.championDetails);
-  let { error, loading, currentChamp } = currentChampion;
+  const currentChampion = useSelector(state => state.championDetails);
+  const { error, loading, currentChamp } = currentChampion;
 
   useEffect(() => {
     if (!currentChamp.id || currentChamp.id !== paramsChampId) {
@@ -31,30 +32,39 @@ const ChampionDetailScreen = ({ match }) => {
     }
   }, [dispatch, currentChamp.id, paramsChampId]);
 
+  const carouselItems = () => {
+    let items = null;
+    if (loading) {
+      items = <Loader />;
+    } else if (error) {
+      items = <div>error </div>;
+    } else {
+      items = currentChamp.skins.map(skin => (
+        <Carousel.Item key={skin.id}>
+          <StyledImageContainer
+            src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${paramsChampId}_${skin.num}.jpg`}
+          />
+          <Carousel.Caption> {skin.name}! </Carousel.Caption>
+        </Carousel.Item>
+      ));
+    }
+    return items;
+  };
+
   return (
     <Container style={{ margin: '20px auto' }}>
-      {loading ? (
-        <Loader> {loading} </Loader>
-      ) : error ? (
-        <div>error message {error} </div>
-      ) : (
-        <Carousel animation="false">
-          {loading ? (
-            <div> loading </div>
-          ) : (
-            currentChamp.skins.map(skin => (
-              <Carousel.Item key={skin.id}>
-                <StyledImageContainer
-                  src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${paramsChampId}_${skin.num}.jpg`}
-                />
-                <Carousel.Caption> {skin.name}! </Carousel.Caption>
-              </Carousel.Item>
-            ))
-          )}
-        </Carousel>
-      )}
+      <Carousel animation="false">{carouselItems()}</Carousel>
     </Container>
   );
+};
+
+ChampionDetailScreen.propTypes = {
+  match: PropTypes.shape({
+    isExact: PropTypes.bool,
+    params: PropTypes.shape({ id: PropTypes.string }),
+    path: PropTypes.string,
+    url: PropTypes.string,
+  }).isRequired,
 };
 
 // <Carousel.Item>

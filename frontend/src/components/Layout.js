@@ -1,8 +1,9 @@
 import React from 'react';
-import Footer from './Footer';
+import PropTypes from 'prop-types';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import { Navbar, Nav } from 'react-bootstrap';
+import Footer from './Footer';
 
 const Layout = ({ children }) => {
   return (
@@ -25,6 +26,10 @@ const Layout = ({ children }) => {
       <Footer />
     </div>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

@@ -3,9 +3,9 @@ import { Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const StyledSpinner = styled(Spinner)`
-  width: 100px;
-  height: 100px;
-  margin: 25% 50%;
+  width: 100%;
+  height: 100%;
+  margin: auto;
   display: block;
 `;
 
