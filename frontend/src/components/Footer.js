@@ -2,19 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
-	position: relative;
-	bottom: 0;
-	width: 100%;
-	height: 2.5rem;
-	/* background-color: red; */
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  /* background-color: red; */
 `;
 
 const Footer = () => {
-	return (
-		<StyledFooter>
-			<div> this be a footer</div>
-		</StyledFooter>
-	);
+  return (
+    <StyledFooter>
+      <div> this be a footer</div>
+    </StyledFooter>
+  );
 };
 
 export default Footer;
