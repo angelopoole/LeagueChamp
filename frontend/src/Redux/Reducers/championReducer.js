@@ -7,7 +7,7 @@ import {
   GET_CHAMPION_BY_ID_FAIL,
 } from '../Consonants/championConsonants';
 
-let initialState = {
+const initialState = {
   champions: [],
 };
 

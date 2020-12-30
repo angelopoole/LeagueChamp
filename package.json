@@ -21,11 +21,11 @@
 		"axios": "^0.21.1",
 		"colors": "^1.4.0",
 		"express": "^4.17.1",
+		"express-async-handler": "^1.1.4",
 		"image-downloader": "^4.0.2"
 	},
 	"devDependencies": {
 		"concurrently": "^5.3.0",
-		"eslint": "^7.16.0",
 		"eslint-config-airbnb": "^18.2.1",
 		"eslint-config-airbnb-base": "^14.2.1",
 		"eslint-config-prettier": "^7.1.0",
@@ -34,6 +34,8 @@
 		"eslint-plugin-prettier": "^3.3.0",
 		"eslint-plugin-react": "^7.21.5",
 		"eslint-plugin-react-hooks": "^4.0.0",
+		"husky": "^4.3.6",
+		"lint-staged": "^10.5.3",
 		"nodemon": "^2.0.6",
 		"prettier": "2.2.1"
 	}
