@@ -81,7 +81,7 @@ const ChampionDetailScreen = ({ match }) => {
   ) : (
     spells.map(spell => (
       <Col key={spell.id}>
-        <ChampionAbilityCard spell={spell} />
+        <ChampionAbilityCard spell={spell} passive={passive} />
       </Col>
     ))
   );

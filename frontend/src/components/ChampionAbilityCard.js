@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const ChampionAbilityCards = ({ spell }) => {
+const ChampionAbilityCards = ({ spell, passive }) => {
   const {
     cooldown,
     cooldownBurn,

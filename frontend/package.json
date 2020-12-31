@@ -42,6 +42,8 @@
       "prettier"
     ],
     "rules": {
+      "arrow-body-style": "off",
+      "prefer-arrow-callback": "off",
       "react/jsx-closing-bracket-location": 0,
       "react/jsx-one-expression-per-line": [
         0,

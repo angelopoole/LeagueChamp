@@ -15,7 +15,7 @@ const WhiteTabBox = styled.div`
   background-color: white;
   transition: transform 0.5s ease 0s;
   transform: translate(50%, -50%) rotate(45deg);
-  z-index: 1000;
+  z-index: 10;
 `;
 const TitleCard = styled.div`
   transition: var(--transition);
@@ -85,7 +85,7 @@ const ChampionCard = ({ champion }) => {
             className="img"
             alt={name}
             id="image"
-            src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`}
+            src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`}
           />
         </Card>
         <TitleCard>{name}</TitleCard>

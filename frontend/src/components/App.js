@@ -4,8 +4,8 @@ import React from 'react';
 
 // components
 import Layout from './Layout';
-import HomeScreen from '../pages/HomeScreen';
-import ChampionDetailScreen from '../pages/ChampionDetailScreen';
+import HomeScreen from '../screens/HomeScreen';
+import ChampionDetailScreen from '../screens/ChampionDetailScreen';
 
 function App() {
   return (
