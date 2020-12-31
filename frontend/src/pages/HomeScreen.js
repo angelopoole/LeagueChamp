@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Col, Form, Row, Container } from 'react-bootstrap';
 
 import ChampionCard from '../components/ChampionCard';
 import Loader from '../components/Loader';
 import { getAllChampions } from '../Redux/Actions/championAction';
 
+//  #######################################
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const champs = useSelector(state => state.champions);
@@ -34,7 +35,9 @@ const HomeScreen = () => {
       cards = <div>error </div>;
     } else {
       cards = filterOutChampions.map(champion => (
-        <Col key={champion.id} sm={1} md={6} lg={4} xl={3}>
+        <Col
+          key={champion.id}
+          style={{ padding: '20px 20px 0px 0px', margin: '20px 20px 0px 0px' }}>
           <ChampionCard champion={champion} />
         </Col>
       ));
@@ -57,7 +60,11 @@ const HomeScreen = () => {
         </Form.Row>
       </Form>
       <main>
-        <Row sm={2}>{displayCards()}</Row>
+        <Container variant="dark">
+          <Row lg={5} md={4} sm={2} noGutters>
+            {displayCards()}
+          </Row>
+        </Container>
       </main>
     </div>
   );

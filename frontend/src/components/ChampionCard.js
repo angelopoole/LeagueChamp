@@ -5,29 +5,56 @@ import PropTypes from 'prop-types';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
-const TransparentContainer = styled(Container)`
-  background-color: rgba(203, 235, 235, 0.59);
-  height: 100%;
-  color: black;
+const WhiteTabBox = styled.div`
+  content: '  ';
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 11%;
+  padding-top: 11%;
+  background-color: white;
+  transition: transform 0.5s ease 0s;
+  transform: translate(50%, -50%) rotate(45deg);
+  z-index: 1000;
 `;
-
+const TitleCard = styled.div`
+  transition: var(--transition);
+  color: white;
+  padding: 5px 0px 5px 5px;
+  background-color: black;
+  width: 200px;
+  margin: auto;
+  text-transform: uppercase;
+  font-style: italic;
+`;
 const HoverContainer = styled(Container)`
   #wholeCard {
+    overflow: hidden;
+    height: 200px;
+    width: 200px;
+    margin: auto;
     transition: var(--transition);
-    #transContainer {
-      transition: var(--transition);
-      /* filter: blur(5px); */
-    }
+    border-color: transparent;
+  }
+  #image {
+    transition: var(--transition);
+    object-fit: cover;
+    object-position: 20% 10%;
+    width: '100%';
   }
 
   #wholeCard:hover {
-    transition: var(--transition);
-    box-shadow: 5px 10px 13px var(--cyan);
-    #transContainer {
+    #image {
+      transform: scale3d(1.05, 1.05, 1);
+    }
+    ${WhiteTabBox} {
       transition: var(--transition);
-      background-color: transparent;
-      color: transparent;
-      /* cursor: pointer; */
+      background-color: white;
+      transform: translate(120px, -50%);
+    }
+    + ${TitleCard} {
+      transition: var(--transition);
+      color: gold;
     }
   }
 `;
@@ -36,7 +63,7 @@ const HoverContainer = styled(Container)`
 // figure out a way to generate an overlay trigger that gives info on a champion
 const ChampionCard = ({ champion }) => {
   const {
-    blurb,
+    // blurb,
     id,
     // image,
     // info,
@@ -45,28 +72,23 @@ const ChampionCard = ({ champion }) => {
     // partype,
     // stats,
     // tags,
-    title,
+    // title,
     // version,
   } = champion;
 
   return (
     <LinkContainer to={`champion/${id}`}>
       <HoverContainer>
-        <Card className="p-3 m-3" border="secondary" id="wholeCard">
+        <Card id="wholeCard">
+          <WhiteTabBox />
           <Card.Img
-            style={{ height: '100%', width: '100%' }}
             className="img"
             alt={name}
+            id="image"
             src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`}
           />
-          <Card.ImgOverlay>
-            <TransparentContainer fluid id="transContainer">
-              <Card.Title className="h1">{name}</Card.Title>
-              <Card.Body>{blurb}</Card.Body>
-              <Card.Subtitle>{title}</Card.Subtitle>
-            </TransparentContainer>
-          </Card.ImgOverlay>
         </Card>
+        <TitleCard>{name}</TitleCard>
       </HoverContainer>
     </LinkContainer>
   );
@@ -135,3 +157,20 @@ export default ChampionCard;
 // tags: ["Marksman"]
 // title: "the Desert Rose"
 // version: "10.25.1"
+
+// return (
+//   <LinkContainer to={`champion/${id}`}>
+//     <HoverContainer>
+//       <WhiteTabBox>box</WhiteTabBox>
+//       <Card className="p-1 m-1" border="primary" id="wholeCard">
+//         <Card.Img
+//           style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+//           className="img"
+//           alt={name}
+//           id="image"
+//           src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`}
+//         />
+//       </Card>
+//     </HoverContainer>
+//   </LinkContainer>
+// );
