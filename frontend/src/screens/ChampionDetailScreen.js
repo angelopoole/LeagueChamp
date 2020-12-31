@@ -9,17 +9,20 @@ import styled from 'styled-components';
 import Loader from '../components/Loader';
 import ChampionAbilityCard from '../components/ChampionAbilityCard';
 import ChampionHero from '../components/ChampionHero';
+import SkinsCarousel from '../components/SkinsCarousel';
 
 // redux
 import { getChampionById } from '../Redux/Actions/championAction';
 
 // styled Components
-const StyledImageContainer = styled(Image)`
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  height: 100%;
+
+const StyledCol = styled(Col)`
+  background-color: var(--gray-dark);
+  border-radius: var(--border-radius);
+  color: white;
+  strong {
+    text-align: center;
+  }
 `;
 
 // component begin
@@ -36,24 +39,24 @@ const ChampionDetailScreen = ({ match }) => {
     }
   }, [dispatch, paramsChampId]);
 
-  const carouselItems = () => {
-    let items = null;
-    if (loading) {
-      items = <Loader />;
-    } else if (error) {
-      items = <div>error </div>;
-    } else {
-      items = currentChamp.skins.map(skin => (
-        <Carousel.Item key={skin.id}>
-          <StyledImageContainer
-            src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${paramsChampId}_${skin.num}.jpg`}
-          />
-          <Carousel.Caption> {skin.name}! </Carousel.Caption>
-        </Carousel.Item>
-      ));
-    }
-    return items;
-  };
+  // const carouselItems = () => {
+  //   let items = null;
+  //   if (loading) {
+  //     items = <Loader />;
+  //   } else if (error) {
+  //     items = <div>error </div>;
+  //   } else {
+  //     items = currentChamp.skins.map(skin => (
+  //       <Carousel.Item key={skin.id}>
+  //         <StyledImageContainer
+  //           src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${paramsChampId}_${skin.num}.jpg`}
+  //         />
+  //         <Carousel.Caption> {skin.name}! </Carousel.Caption>
+  //       </Carousel.Item>
+  //     ));
+  //   }
+  //   return items;
+  // };
 
   const {
     allytips,
@@ -75,13 +78,12 @@ const ChampionDetailScreen = ({ match }) => {
     title,
   } = currentChamp;
 
-  // eslint-disable-next-line no-extra-boolean-cast
-  const spellCards = !!loading ? (
+  const spellCards = loading ? (
     <Loader />
   ) : (
     spells.map(spell => (
-      <Col key={spell.id}>
-        <ChampionAbilityCard spell={spell} passive={passive} />
+      <Col key={spell.id} className="col-sm-2">
+        <ChampionAbilityCard spell={spell} />
       </Col>
     ))
   );
@@ -93,17 +95,31 @@ const ChampionDetailScreen = ({ match }) => {
     <Container style={{ margin: 'auto' }}>
       <ChampionHero id={id} />
 
-      <Carousel animation="false" style={{ height: '55%', width: '55%', margin: 'auto' }}>
-        {carouselItems()}
-      </Carousel>
+      <SkinsCarousel skins={skins} loading={loading} error={error} match={match} />
       <Container>
         <Row style={{ margin: 'auto', width: '50%', textAlign: 'center' }}>
           <Col>{title}</Col>
         </Row>
-        <Row style={{ margin: 'auto', width: '100vh', height: '100%' }}>{spellCards}</Row>
+        <Row
+          className="justify-content-center"
+          style={{ margin: 'auto', width: '100vh', height: '100%' }}>
+          <Col className="col-sm-2">
+            <ChampionAbilityCard passive={passive} />
+          </Col>
+          {spellCards}
+        </Row>
         <Row>
-          <Col>{allytips}</Col>
-          <Col>{enemytips}</Col>
+          <StyledCol className="tips">
+            {allytips.map(tip => (
+              <Row>--{tip}</Row>
+            ))}
+          </StyledCol>
+          <StyledCol className="tips" style={{ borderStyle: 'none none none solid' }}>
+            <strong>Ally tips</strong>
+            {enemytips.map(tip => (
+              <Row> --{tip}</Row>
+            ))}
+          </StyledCol>
         </Row>
       </Container>
     </Container>

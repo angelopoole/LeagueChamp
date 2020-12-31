@@ -29,6 +29,7 @@ const TitleCard = styled.div`
 `;
 const HoverContainer = styled(Container)`
   #wholeCard {
+    cursor: pointer;
     overflow: hidden;
     height: 200px;
     width: 200px;

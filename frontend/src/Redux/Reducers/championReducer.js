@@ -25,12 +25,15 @@ export const championReducer = (state = initialState, { type, payload }) => {
 };
 
 export const championDetailsReducer = (
-  state = { currentChamp: { skins: [], spells: [] } },
+  state = { currentChamp: { skins: [], spells: [], enemytips: [], allytips: [] } },
   { type, payload },
 ) => {
   switch (type) {
     case GET_CHAMPION_BY_ID_REQUEST:
-      return { loading: true, currentChamp: { skins: [], spells: [] } };
+      return {
+        loading: true,
+        currentChamp: { skins: [], spells: [], enemytips: [], allytips: [] },
+      };
     case GET_CHAMPION_BY_ID_SUCCESS:
       return { loading: false, currentChamp: payload };
     case GET_CHAMPION_BY_ID_FAIL:

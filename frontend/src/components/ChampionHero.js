@@ -50,10 +50,10 @@ const StyleWrapper = styled.div`
 `;
 
 const StyleTile = styled.div`
-  width: 60px;
+  width: 12px;
   flex: 0 0 auto;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 const StyledTextContainer = styled.div`
