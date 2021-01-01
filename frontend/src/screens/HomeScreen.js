@@ -41,10 +41,9 @@ const HomeScreen = () => {
     setFilter(([e.target.name] = e.target.value));
   };
 
-  const filterOutChampions = champions.filter(champ =>
-    champ.name.toLowerCase().includes(filter.toLowerCase()) && tagFilter === ''
-      ? champ.tags
-      : champ.tags.includes(tagFilter),
+  const filterOutChampions = champions.filter(
+    champ =>
+      champ.name.toLowerCase().includes(filter.toLowerCase()) && champ.tags.includes(tagFilter),
   );
 
   // eslint-disable-next-line no-unused-vars
