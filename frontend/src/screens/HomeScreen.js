@@ -43,20 +43,13 @@ const HomeScreen = () => {
 
   const filterOutChampions = champions.filter(champ =>
     champ.name.toLowerCase().includes(filter.toLowerCase()) && tagFilter === ''
-      ? null
+      ? champ.tags
       : champ.tags.includes(tagFilter),
   );
 
   // eslint-disable-next-line no-unused-vars
-  const filterByTag = tag => {
-    // let taggedChamps = null;
+  const setFilterByTag = tag => {
     setTagFilter(tag);
-    // if (tag !== 'All') {
-    // taggedChamps = filterOutChampions.filter(champ => champ.tags.includes(tagFilter));
-    // } else {
-    // taggedChamps = filterOutChampions;
-    // }
-    // filterOutChampions = taggedChamps;
   };
 
   const displayCards = arrayOfChamps => {
@@ -95,22 +88,34 @@ const HomeScreen = () => {
           <FormControlCol>
             <FormButtonsContainer xs={7}>
               {/* <ButtonGroup aria-label="Basic example"> */}
-              <FormButtons variant="secondary" onClick={() => filterByTag('')}>
+              <FormButtons
+                variant={tagFilter === '' ? 'primary' : 'secondary'}
+                onClick={() => setFilterByTag('')}>
                 all
               </FormButtons>
-              <FormButtons variant="secondary" onClick={() => filterByTag('Assassin')}>
+              <FormButtons
+                variant={tagFilter === 'Assassin' ? 'primary' : 'secondary'}
+                onClick={() => setFilterByTag('Assassin')}>
                 assasins
               </FormButtons>
-              <FormButtons variant="secondary" onClick={() => filterByTag('Fighter')}>
+              <FormButtons
+                variant={tagFilter === 'Fighter' ? 'primary' : 'secondary'}
+                onClick={() => setFilterByTag('Fighter')}>
                 fighters
               </FormButtons>
-              <FormButtons variant="secondary" onClick={() => filterByTag('Mage')}>
+              <FormButtons
+                variant={tagFilter === 'Mage' ? 'primary' : 'secondary'}
+                onClick={() => setFilterByTag('Mage')}>
                 mage
               </FormButtons>
-              <FormButtons variant="secondary" onClick={() => filterByTag('Marksman')}>
+              <FormButtons
+                variant={tagFilter === 'Marksman' ? 'primary' : 'secondary'}
+                onClick={() => setFilterByTag('Marksman')}>
                 marksmen
               </FormButtons>
-              <FormButtons variant="secondary" onClick={() => setTagFilter('Support')}>
+              <FormButtons
+                variant={tagFilter === 'Support' ? 'primary' : 'secondary'}
+                onClick={() => setFilterByTag('Support')}>
                 support
               </FormButtons>
               {/* </ButtonGroup> */}

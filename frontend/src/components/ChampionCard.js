@@ -28,6 +28,24 @@ const TitleCard = styled.div`
   font-style: italic;
 `;
 const HoverContainer = styled(Container)`
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: left;
+  transition: var(--transition);
+
+  @keyframes fadeInAnimation {
+    0% {
+      content: '';
+      transform: translate(0px, 10px);
+      opacity: 0;
+    }
+    100% {
+      transition-delay: 250ms;
+      opacity: 1;
+      transform: translate(0px, 0px);
+    }
+  }
+
   #wholeCard {
     cursor: pointer;
     overflow: hidden;
