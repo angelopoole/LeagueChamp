@@ -27,7 +27,8 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const champs = useSelector(state => state.champions);
   const [filter, setFilter] = useState('');
-  const [tagFilter, setTagFilter] = useState('All');
+  const [tagFilter, setTagFilter] = useState('');
+
   const { error, loading, champions } = champs;
 
   useEffect(() => {
@@ -40,33 +41,32 @@ const HomeScreen = () => {
     setFilter(([e.target.name] = e.target.value));
   };
 
-  let filterOutChampions = champions.filter(champ =>
-    champ.name.toLowerCase().includes(filter.toLowerCase()),
+  const filterOutChampions = champions.filter(champ =>
+    champ.name.toLowerCase().includes(filter.toLowerCase()) && tagFilter === ''
+      ? null
+      : champ.tags.includes(tagFilter),
   );
 
   // eslint-disable-next-line no-unused-vars
   const filterByTag = tag => {
-    let taggedChamps = null;
-    if (tag !== 'All') {
-      taggedChamps = filterOutChampions.filter(champ => champ.tags.includes(tagFilter));
-    } else {
-      taggedChamps = filterOutChampions;
-    }
+    // let taggedChamps = null;
     setTagFilter(tag);
-    filterOutChampions = taggedChamps;
-    console.log('trogger', taggedChamps);
-    console.log(filterOutChampions);
-    // return taggedChamps;
+    // if (tag !== 'All') {
+    // taggedChamps = filterOutChampions.filter(champ => champ.tags.includes(tagFilter));
+    // } else {
+    // taggedChamps = filterOutChampions;
+    // }
+    // filterOutChampions = taggedChamps;
   };
 
-  const displayCards = () => {
+  const displayCards = arrayOfChamps => {
     let cards = null;
     if (loading) {
       cards = <Loader />;
     } else if (error) {
       cards = <div>error </div>;
     } else {
-      cards = filterOutChampions.map(champion => (
+      cards = arrayOfChamps.map(champion => (
         <Container>
           <Col
             key={champion.id}
@@ -78,8 +78,6 @@ const HomeScreen = () => {
     }
     return cards;
   };
-
-  console.log(filterByTag);
 
   return (
     <div>
@@ -97,7 +95,7 @@ const HomeScreen = () => {
           <FormControlCol>
             <FormButtonsContainer xs={7}>
               {/* <ButtonGroup aria-label="Basic example"> */}
-              <FormButtons variant="secondary" onClick={() => filterByTag('All')}>
+              <FormButtons variant="secondary" onClick={() => filterByTag('')}>
                 all
               </FormButtons>
               <FormButtons variant="secondary" onClick={() => filterByTag('Assassin')}>
@@ -131,7 +129,7 @@ const HomeScreen = () => {
       </Form>
       <main>
         <Row lg={5} md={4} sm={3} xs={1}>
-          {displayCards()}
+          {displayCards(filterOutChampions)}
         </Row>
       </main>
     </div>
