@@ -85,6 +85,7 @@ const StyleForegroundAsset = styled.div`
   width: 100%;
   padding-bottom: 59.01%;
   -webkit-mask-image: linear-gradient(rgb(0, 0, 0) 65%, rgba(0, 0, 0, 0) 98%);
+  mask-image: linear-gradient(rgb(0, 0, 0) 65%, rgba(0, 0, 0, 0) 98%);
 `;
 
 const StyleForegroundAssetPure = styled.img`

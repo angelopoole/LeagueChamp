@@ -6,13 +6,13 @@ import { Navbar, Nav } from 'react-bootstrap';
 import Footer from './Footer';
 
 const Layout = ({ children }) => (
-  <div style={{ top: '0', zIndex: '1000', backgroundColor: 'rgb(42, 44, 59)' }}>
+  <div style={{ top: '0', zIndex: '1000' }}>
     <Navbar
       className="navbar navbar-expand-lg navbar-dark bg-dark"
       bg="light"
       expand="lg"
       varriant="dark"
-      style={{ top: '0', zIndex: '1000', position: 'fixed', width: '100%' }}>
+      style={{ top: '0', zIndex: '1000', position: 'sticky', width: '100%' }}>
       <LinkContainer to="/">
         <Navbar.Brand>League Champs</Navbar.Brand>
       </LinkContainer>

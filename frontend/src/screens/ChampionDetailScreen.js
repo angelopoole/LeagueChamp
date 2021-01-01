@@ -8,8 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Loader from '../components/Loader';
 import ChampionAbilityCard from '../components/ChampionAbilityCard';
-import ChampionHero from '../components/ChampionHero';
-import SkinsCarousel from '../components/SkinsCarousel';
+import ChampionHero from '../components/sections/ChampionHero';
+import SkinsCarousel from '../components/sections/SkinsCarousel';
 
 // redux
 import { getChampionById } from '../Redux/Actions/championAction';

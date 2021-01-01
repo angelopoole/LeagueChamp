@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Carousel, Image } from 'react-bootstrap';
 
-import Loader from './Loader';
+import Loader from '../Loader';
 
 const StyledImageContainer = styled(Image)`
   display: block;
