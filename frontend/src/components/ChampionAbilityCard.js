@@ -57,8 +57,6 @@ const ChampionAbilityCards = ({ spell, passive }) => {
     );
   }
 
-  // console.log(spell, passive);
-
   return <Card>{card}</Card>;
 };
 
