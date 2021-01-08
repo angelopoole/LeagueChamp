@@ -56,7 +56,6 @@ const HomeScreen = () => {
     );
   };
 
-  // eslint-disable-next-line no-unused-vars
   const setFilterByTag = tag => {
     setTagFilter(tag);
   };

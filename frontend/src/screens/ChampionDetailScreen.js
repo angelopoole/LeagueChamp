@@ -39,25 +39,6 @@ const ChampionDetailScreen = ({ match }) => {
     }
   }, [dispatch, paramsChampId]);
 
-  // const carouselItems = () => {
-  //   let items = null;
-  //   if (loading) {
-  //     items = <Loader />;
-  //   } else if (error) {
-  //     items = <div>error </div>;
-  //   } else {
-  //     items = currentChamp.skins.map(skin => (
-  //       <Carousel.Item key={skin.id}>
-  //         <StyledImageContainer
-  //           src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${paramsChampId}_${skin.num}.jpg`}
-  //         />
-  //         <Carousel.Caption> {skin.name}! </Carousel.Caption>
-  //       </Carousel.Item>
-  //     ));
-  //   }
-  //   return items;
-  // };
-
   const {
     allytips,
     blurb,
@@ -87,9 +68,6 @@ const ChampionDetailScreen = ({ match }) => {
       </Col>
     ))
   );
-
-  console.log(currentChamp);
-  // console.log(spells.map(spell => console.log(spell)));
 
   return (
     <Container style={{ margin: 'auto' }}>
@@ -136,26 +114,3 @@ ChampionDetailScreen.propTypes = {
 };
 
 export default ChampionDetailScreen;
-
-// allytips: (3) ["Use Charm to set up your combos, it will make land…rb of Deception and Fox-Fire dramatically easier.", "Initiate team fights using Charm, and chase down stragglers with Spirit Rush.", "Spirit Rush enables Ahri's abilities, it opens up …of Deception, and closes to make use of Fox-Fire."]
-
-// blurb: "Innately connected to the latent power of Runeterra, Ahri is a vastaya who can reshape magic into orbs of raw energy. She revels in toying with her prey by manipulating their emotions before devouring their life essence. Despite her predatory nature..."
-
-// enemytips: (2) ["Ahri's survivability is dramatically reduced when her Ultimate, Spirit Rush, is down.", "Stay behind minions to make Charm difficult to lan…ill reduce Ahri's damage potential significantly."]
-
-// id: "Ahri"
-
-// image: {full: "Ahri.png", sprite: "champion0.png", group: "champion", x: 48, y: 0, …}
-
-// info: {attack: 3, defense: 4, magic: 8, difficulty: 5}
-// key: "103"
-// lore: "Innately connected to the latent power of Runeterra, Ahri is a vastaya who can reshape magic into orbs of raw energy. She revels in toying with her prey by manipulating their emotions before devouring their life essence. Despite her predatory nature, Ahri retains a sense of empathy as she receives flashes of memory from each soul she consumes."
-// name: "Ahri"
-// partype: "Mana"
-// passive: {name: "Essence Theft", description: "When Ahri strikes 9 enemies with her abilities, her next ability also heals her for each enemy hit.", image: {…}}
-// recommended: (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-// skins: (14) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-// spells: (4) [{…}, {…}, {…}, {…}]
-// stats: {hp: 526, hpperlevel: 92, mp: 418, mpperlevel: 25, movespeed: 330, …}
-// tags: (2) ["Mage", "Assassin"]
-// title: "the Nine-Tailed Fox"

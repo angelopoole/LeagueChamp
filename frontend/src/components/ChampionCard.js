@@ -164,32 +164,3 @@ ChampionCard.propTypes = {
 };
 
 export default ChampionCard;
-
-// blurb: "Samira stares death in the eye with unyielding confidence, seeking thrill wherever she goes. After her Shuriman home was destroyed as a child, Samira found her true calling in Noxus, where she built a reputation as a stylish daredevil taking on..."
-// id: "Samira"
-// image: {full: "Samira.png", sprite: "champion3.png", group: "champion", x: 48, y: 48, …}
-// info: {attack: 8, defense: 5, magic: 3, difficulty: 6}
-// key: "360"
-// name: "Samira"
-// partype: "Mana"
-// stats: {hp: 530, hpperlevel: 88, mp: 348.88, mpperlevel: 38, movespeed: 335, …}
-// tags: ["Marksman"]
-// title: "the Desert Rose"
-// version: "10.25.1"
-
-// return (
-//   <LinkContainer to={`champion/${id}`}>
-//     <HoverContainer>
-//       <WhiteTabBox>box</WhiteTabBox>
-//       <Card className="p-1 m-1" border="primary" id="wholeCard">
-//         <Card.Img
-//           style={{ height: '100%', width: '100%', objectFit: 'cover' }}
-//           className="img"
-//           alt={name}
-//           id="image"
-//           src={`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`}
-//         />
-//       </Card>
-//     </HoverContainer>
-//   </LinkContainer>
-// );
