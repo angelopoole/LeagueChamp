@@ -6,7 +6,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import Footer from './Footer';
 
 const Layout = ({ children }) => (
-  <div style={{ top: '0', zIndex: '1000' }}>
+  <div>
     <Navbar
       className="navbar navbar-expand-lg navbar-dark bg-dark"
       bg="light"
