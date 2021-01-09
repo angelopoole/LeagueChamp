@@ -25,12 +25,17 @@ const FormButtonsContainer = styled(Row)`
 
 //  #######################################
 const HomeScreen = () => {
-  const width = window.innerWidth;
+  // const width = window.innerWidth;
+
+  // Redux
   const dispatch = useDispatch();
   const champs = useSelector(state => state.champions);
+
+  // create filters for tag and filter.
   const [filter, setFilter] = useState('');
   const [tagFilter, setTagFilter] = useState('');
 
+  // Grab champions from redux state
   const { error, loading, champions } = champs;
 
   useEffect(() => {
@@ -43,7 +48,6 @@ const HomeScreen = () => {
     setFilter(([e.target.name] = e.target.value));
   };
 
-  console.log(width);
   const filterOutChampions = () => {
     // get two seperate array, reference eachother to get array of things to show
     // combine these two arrays as long as the champion is in common
@@ -79,6 +83,8 @@ const HomeScreen = () => {
     }
     return cards;
   };
+
+  console.log(champions.map(champ => champ.info.difficulty));
 
   return (
     <div>
