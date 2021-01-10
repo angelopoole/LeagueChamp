@@ -1,7 +1,17 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Col, Form, Row, Container, Button, ButtonGroup } from 'react-bootstrap';
+import {
+  Col,
+  Form,
+  Row,
+  Container,
+  Button,
+  ButtonGroup,
+  Dropdown,
+  DropdownButton,
+} from 'react-bootstrap';
 import styled from 'styled-components';
 
 import ChampionCard from '../components/ChampionCard';
@@ -34,6 +44,7 @@ const HomeScreen = () => {
   // create filters for tag and filter.
   const [filter, setFilter] = useState('');
   const [tagFilter, setTagFilter] = useState('');
+  const [difficultyFilter, setDifficultyFilter] = useState('All Difficulties');
 
   // Grab champions from redux state
   const { error, loading, champions } = champs;
@@ -49,8 +60,18 @@ const HomeScreen = () => {
   };
 
   const filterOutChampions = () => {
-    // get two seperate array, reference eachother to get array of things to show
-    // combine these two arrays as long as the champion is in common
+    // If tag filter is active, we use a different method to filter out the champions
+
+    // console.log(
+    //   champions.map(champ =>
+    //     champ.info.difficulty < 4
+    //       ? 'easy'
+    //       : champ.info.difficulty <= 4 && champ.info.difficulty < 7
+    //       ? 'intermediate'
+    //       : 'Hard',
+    //   ),
+    // );
+
     if (tagFilter === '') {
       return champions.filter(champ => champ.name.toLowerCase().includes(filter.toLowerCase()));
     }
@@ -84,13 +105,15 @@ const HomeScreen = () => {
     return cards;
   };
 
-  console.log(champions.map(champ => champ.info.difficulty));
+  const logger = e => {
+    console.log(e);
+  };
 
   return (
     <div>
       <Form style={{ marginTop: '15px' }}>
-        <Form.Row style={{ flexFlow: 'noWrap' }}>
-          <FormControlCol xs={3}>
+        <Form.Row style={{ flexFlow: 'noWrap', margin: '15px 15px 15px 15px' }}>
+          <FormControlCol xs={4}>
             <Form.Control
               style={{ top: '30px' }}
               label="search champs"
@@ -100,7 +123,7 @@ const HomeScreen = () => {
             />
           </FormControlCol>
           <FormControlCol>
-            <FormButtonsContainer xs={7}>
+            <FormButtonsContainer xs={6}>
               <ButtonGroup>
                 <FormButtons
                   variant={tagFilter === '' ? 'info' : 'secondary'}
@@ -136,13 +159,30 @@ const HomeScreen = () => {
             </FormButtonsContainer>
           </FormControlCol>
           <FormControlCol>
-            <Form.Control
-              style={{ top: '30px' }}
-              label="seach by difficulty"
-              placeholder="seach by difficulty"
-              name="filter"
-              onChange={e => filterChampsHandler(e)}
-            />
+            {/*  */}
+            {/*  */}
+            {/*  */}
+            <DropdownButton
+              title={difficultyFilter}
+              // onSubmit={e => e.preventDefault()}
+              // onSelect={e => e.preventDefault()}
+            >
+              <Dropdown.Item as="button" onSelect={e => e.preventDefault()} value="">
+                All Difficultys
+              </Dropdown.Item>
+              <Dropdown.Item as="button" onSelect={e => e.preventDefault()} value="Easy">
+                Easy
+              </Dropdown.Item>
+              <Dropdown.Item as="button" onSelect={e => e.preventDefault()} value="Medium">
+                Medium
+              </Dropdown.Item>
+              <Dropdown.Item as="button" onSelect={e => e.preventDefault()} value="Hard">
+                Hard
+              </Dropdown.Item>
+            </DropdownButton>
+            {/*  */}
+            {/*  */}
+            {/*  */}
           </FormControlCol>
         </Form.Row>
       </Form>
