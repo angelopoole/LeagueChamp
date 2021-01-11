@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Loader from '../components/Loader';
 import ChampionAbilityCard from '../components/ChampionAbilityCard';
+import ChampionAbilitySection from '../components/sections/ChampionAbilitySection';
 import ChampionHero from '../components/sections/ChampionHero';
 import SkinsCarousel from '../components/sections/SkinsCarousel';
 
@@ -23,6 +24,18 @@ const StyledCol = styled(Col)`
   strong {
     text-align: center;
   }
+`;
+
+const OuterContainer = styled(Container)`
+  color: red;
+`;
+
+const AbilityImageRow = styled(Row)`
+  background-color: grey;
+`;
+
+const AbilityContainer = styled(Container)`
+  background-color: blue;
 `;
 
 // component begin
@@ -59,7 +72,7 @@ const ChampionDetailScreen = ({ match }) => {
     title,
   } = currentChamp;
 
-  const spellCards = loading ? (
+  const abilityCards = loading ? (
     <Loader />
   ) : (
     spells.map(spell => (
@@ -69,24 +82,31 @@ const ChampionDetailScreen = ({ match }) => {
     ))
   );
 
-  console.log(currentChamp);
+  // console.log(currentChamp);
 
   return (
     <Container style={{ margin: 'auto' }}>
       <ChampionHero id={id} />
 
       <SkinsCarousel skins={skins} loading={loading} error={error} match={match} />
-      <Container>
+      <OuterContainer>
         <Row style={{ margin: 'auto', width: '50%', textAlign: 'center' }}>
           <Col>{title}</Col>
         </Row>
-        <Row
-          className="justify-content-center"
-          style={{ margin: 'auto', width: '100vh', height: '100%' }}>
-          <Col className="col-sm-2">
-            <ChampionAbilityCard passive={passive} />
-          </Col>
-          {spellCards}
+        <ChampionAbilitySection passive={passive} abilities={spells} />
+        {/* <AbilityContainer>
+          <AbilityImageRow
+            className="justify-content-center"
+            style={{ margin: 'auto', width: '100vh', height: '100%' }}>
+            <Col className="col-sm-2">
+              <ChampionAbilityCard passive={passive} />
+            </Col>
+            {abilityCards}
+          </AbilityImageRow>
+          <div>hello</div>
+        </AbilityContainer> */}
+        <Row>
+          <StyledCol className="tips">{name}</StyledCol>
         </Row>
         <Row>
           <StyledCol className="tips">
@@ -101,7 +121,7 @@ const ChampionDetailScreen = ({ match }) => {
             ))}
           </StyledCol>
         </Row>
-      </Container>
+      </OuterContainer>
     </Container>
   );
 };

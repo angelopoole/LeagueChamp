@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 
 import React from 'react';
@@ -37,19 +38,22 @@ const ChampionAbilityCards = ({ spell, passive }) => {
     } = spell;
 
     card = (
-      <Card className="h-100">
-        <Card.Title style={{ height: '30px', textAlign: 'center' }}>{name}</Card.Title>
-        <ImageWrapper
-          src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${image.full}`}
-        />
-      </Card>
+      <>
+        <Card className="h-100" onClick={() => console.log(name)}>
+          {/* <Card.Title style={{ height: '30px', textAlign: 'center' }}>{name}</Card.Title> */}
+          <ImageWrapper
+            src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${image.full}`}
+          />
+        </Card>
+        {/* <div> {description}</div> */}
+      </>
     );
   } else if (passive) {
     const { description, image, name } = passive;
 
     card = (
-      <Card className=" h-100">
-        <Card.Title style={{ height: '30px', textAlign: 'center' }}>{name}</Card.Title>
+      <Card className=" h-100" onClick={() => console.log(name)}>
+        {/* <Card.Title style={{ height: '30px', textAlign: 'center' }}>{name}</Card.Title> */}
         <Card.Img
           src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/passive/${image.full}`}
         />
