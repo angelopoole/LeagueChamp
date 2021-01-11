@@ -2,16 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  Col,
-  Form,
-  Row,
-  Container,
-  Button,
-  ButtonGroup,
-  Dropdown,
-  DropdownButton,
-} from 'react-bootstrap';
+import { Col, Form, Row, Container, Button, ButtonGroup } from 'react-bootstrap';
 import styled from 'styled-components';
 
 import ChampionCard from '../components/ChampionCard';
@@ -44,7 +35,7 @@ const HomeScreen = () => {
   // create filters for tag and filter.
   const [filter, setFilter] = useState('');
   const [tagFilter, setTagFilter] = useState('');
-  const [difficultyFilter, setDifficultyFilter] = useState('All Difficulties');
+  const [difficultyFilter, setDifficultyFilter] = useState('');
 
   // Grab champions from redux state
   const { error, loading, champions } = champs;
@@ -59,26 +50,56 @@ const HomeScreen = () => {
     setFilter(([e.target.name] = e.target.value));
   };
 
+  const difficultyFilterHandler = e => {
+    setDifficultyFilter(([e.target.name] = e.target.value));
+  };
+
   const filterOutChampions = () => {
     // If tag filter is active, we use a different method to filter out the champions
+    const difficultyFilterconverstion = diff => {
+      let arr = [];
+      // difficulty filter returns 4,5 or 7
+      if (diff === '4') {
+        arr = [1, 2, 3];
+      } else if (diff === '5') {
+        arr = [4, 5, 6];
+      } else if (diff === '7') {
+        arr = [7, 8, 9, 10];
+      }
+      // console.log(arr);
+      return arr;
+    };
 
-    // console.log(
-    //   champions.map(champ =>
-    //     champ.info.difficulty < 4
-    //       ? 'easy'
-    //       : champ.info.difficulty <= 4 && champ.info.difficulty < 7
-    //       ? 'intermediate'
-    //       : 'Hard',
-    //   ),
-    // );
-
-    if (tagFilter === '') {
-      return champions.filter(champ => champ.name.toLowerCase().includes(filter.toLowerCase()));
-    }
-    return champions.filter(
-      champ =>
-        champ.name.toLowerCase().includes(filter.toLowerCase()) && champ.tags.includes(tagFilter),
+    const textFilteredArray = champions.filter(champ =>
+      champ.name.toLowerCase().includes(filter.toLowerCase()),
     );
+
+    // Use basic text filtering
+    if (tagFilter === '' && difficultyFilter === '') {
+      // no select filter in use
+      return textFilteredArray;
+    }
+    if (tagFilter !== '' && difficultyFilter !== '') {
+      //  both diff and tag filter in use
+      return textFilteredArray.filter(
+        champ =>
+          champ.tags.includes(tagFilter) &&
+          difficultyFilterconverstion(difficultyFilter).includes(champ.info.difficulty),
+      );
+    }
+    if (tagFilter !== '' && difficultyFilter === '') {
+      // if tag filter is only in use
+      return textFilteredArray.filter(champ => champ.tags.includes(tagFilter));
+    }
+    if (difficultyFilter !== '' && tagFilter === '') {
+      // if difficulty filter is only in use
+      // !!!COMPLETE
+      return textFilteredArray.filter(champ =>
+        difficultyFilterconverstion(difficultyFilter).includes(champ.info.difficulty),
+      );
+    }
+    // basereturn
+    return textFilteredArray;
   };
 
   const setFilterByTag = tag => {
@@ -105,9 +126,7 @@ const HomeScreen = () => {
     return cards;
   };
 
-  const logger = e => {
-    console.log(e);
-  };
+  console.log({ difficultyFilter, tagFilter, filter });
 
   return (
     <div>
@@ -162,24 +181,20 @@ const HomeScreen = () => {
             {/*  */}
             {/*  */}
             {/*  */}
-            <DropdownButton
+            <Form.Control
+              as="select"
+              className="my-1 mr-sm-2"
               title={difficultyFilter}
-              // onSubmit={e => e.preventDefault()}
-              // onSelect={e => e.preventDefault()}
-            >
-              <Dropdown.Item as="button" onSelect={e => e.preventDefault()} value="">
-                All Difficultys
-              </Dropdown.Item>
-              <Dropdown.Item as="button" onSelect={e => e.preventDefault()} value="Easy">
-                Easy
-              </Dropdown.Item>
-              <Dropdown.Item as="button" onSelect={e => e.preventDefault()} value="Medium">
-                Medium
-              </Dropdown.Item>
-              <Dropdown.Item as="button" onSelect={e => e.preventDefault()} value="Hard">
-                Hard
-              </Dropdown.Item>
-            </DropdownButton>
+              id="difficultyFilter"
+              name="difficultyFilter"
+              onChange={e => difficultyFilterHandler(e)}
+              custom>
+              <option value="">All Difficulties</option>
+              <option value={4}>Easy</option>
+              <option value={5}>Intermediate</option>
+              <option value={7}>Hard</option>
+            </Form.Control>
+
             {/*  */}
             {/*  */}
             {/*  */}

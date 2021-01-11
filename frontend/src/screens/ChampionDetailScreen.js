@@ -69,6 +69,8 @@ const ChampionDetailScreen = ({ match }) => {
     ))
   );
 
+  console.log(currentChamp);
+
   return (
     <Container style={{ margin: 'auto' }}>
       <ChampionHero id={id} />
