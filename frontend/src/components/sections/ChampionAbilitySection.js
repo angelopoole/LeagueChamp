@@ -27,7 +27,6 @@ const ChampionAbilitySection = ({ passive, abilities }) => {
   return (
     <>
       <OverLayRow>{abilityImages}</OverLayRow>
-      <OverLayRow>yo</OverLayRow>
     </>
   );
 };
