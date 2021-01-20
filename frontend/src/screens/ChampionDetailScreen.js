@@ -7,7 +7,6 @@ import { Image, Carousel, Container, Col, Row } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Loader from '../components/Loader';
-import ChampionAbilityCard from '../components/ChampionAbilityCard';
 import ChampionAbilitySection from '../components/sections/ChampionAbilitySection';
 import ChampionHero from '../components/sections/ChampionHero';
 import SkinsCarousel from '../components/sections/SkinsCarousel';
@@ -48,9 +47,8 @@ const ChampionDetailScreen = ({ match }) => {
   useEffect(() => {
     if (!currentChamp.key || currentChamp.id !== paramsChampId) {
       dispatch(getChampionById(paramsChampId));
-      console.log('object');
     }
-  }, [dispatch, paramsChampId]);
+  }, [dispatch, paramsChampId, currentChamp.id, currentChamp.key]);
 
   const {
     allytips,
@@ -72,57 +70,37 @@ const ChampionDetailScreen = ({ match }) => {
     title,
   } = currentChamp;
 
-  const abilityCards = loading ? (
-    <Loader />
-  ) : (
-    spells.map(spell => (
-      <Col key={spell.id} className="col-sm-2">
-        <ChampionAbilityCard spell={spell} />
-      </Col>
-    ))
-  );
-
-  // console.log(currentChamp);
+  console.log(allytips);
 
   return (
-    <Container style={{ margin: 'auto' }}>
+    <>
       <ChampionHero id={id} />
-
-      <SkinsCarousel skins={skins} loading={loading} error={error} match={match} />
+      <SkinsCarousel key={key} skins={skins} loading={loading} error={error} match={match} />
       <OuterContainer>
         <Row style={{ margin: 'auto', width: '50%', textAlign: 'center' }}>
           <Col>{title}</Col>
         </Row>
-        <ChampionAbilitySection passive={passive} abilities={spells} />
-        {/* <AbilityContainer>
-          <AbilityImageRow
-            className="justify-content-center"
-            style={{ margin: 'auto', width: '100vh', height: '100%' }}>
-            <Col className="col-sm-2">
-              <ChampionAbilityCard passive={passive} />
-            </Col>
-            {abilityCards}
-          </AbilityImageRow>
-          <div>hello</div>
-        </AbilityContainer> */}
+        <ChampionAbilitySection key={key} passive={passive} abilities={spells} />
+
         <Row>
           <StyledCol className="tips">{name}</StyledCol>
         </Row>
         <Row>
           <StyledCol className="tips">
+            <strong>Enemy Tips</strong>
             {allytips.map(tip => (
-              <Row>--{tip}</Row>
+              <Row key={allytips.indexOf(tip)}>--{tip}</Row>
             ))}
           </StyledCol>
           <StyledCol className="tips" style={{ borderStyle: 'none none none solid' }}>
             <strong>Ally tips</strong>
             {enemytips.map(tip => (
-              <Row> --{tip}</Row>
+              <Row key={enemytips.indexOf(tip)}> --{tip}</Row>
             ))}
           </StyledCol>
         </Row>
       </OuterContainer>
-    </Container>
+    </>
   );
 };
 

@@ -5,6 +5,8 @@ import React from 'react';
 import { Card, Image, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
+import PassiveCard from '../PassiveCard';
+
 const ImageWrapper = styled(Image)`
   align-content: center;
 `;
@@ -13,11 +15,11 @@ const OverLayRow = styled(Row)`
 `;
 
 const ChampionAbilitySection = ({ passive, abilities }) => {
-  console.log(passive);
-  console.log(abilities);
+  // console.log(passive);
+  // console.log(abilities);
 
   const abilityImages = abilities.map(ability => (
-    <Col>
+    <Col key={ability.id}>
       <ImageWrapper
         src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${ability.image.full}`}
       />
@@ -26,7 +28,12 @@ const ChampionAbilitySection = ({ passive, abilities }) => {
 
   return (
     <>
-      <OverLayRow>{abilityImages}</OverLayRow>
+      <OverLayRow>
+        <Col>
+          <PassiveCard passive={passive} />
+        </Col>
+        {abilityImages}
+      </OverLayRow>
     </>
   );
 };

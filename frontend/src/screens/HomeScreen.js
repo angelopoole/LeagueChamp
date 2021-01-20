@@ -126,8 +126,6 @@ const HomeScreen = () => {
     return cards;
   };
 
-  console.log({ difficultyFilter, tagFilter, filter });
-
   return (
     <div>
       <Form style={{ marginTop: '15px' }}>
