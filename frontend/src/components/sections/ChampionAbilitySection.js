@@ -15,9 +15,6 @@ const OverLayRow = styled(Row)`
 `;
 
 const ChampionAbilitySection = ({ passive, abilities }) => {
-  // console.log(passive);
-  // console.log(abilities);
-
   const abilityImages = abilities.map(ability => (
     <Col key={ability.id}>
       <ImageWrapper
