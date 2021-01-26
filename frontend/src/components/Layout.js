@@ -22,7 +22,6 @@ const Layout = ({ children }) => (
           <LinkContainer to="/">
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
-          <Nav.Link href="#link">Link</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

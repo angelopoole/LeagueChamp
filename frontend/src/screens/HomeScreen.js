@@ -114,10 +114,8 @@ const HomeScreen = () => {
       cards = <div>error </div>;
     } else {
       cards = arrayOfChamps().map(champion => (
-        <Container>
-          <Col
-            key={champion.id}
-            style={{ padding: '20px 20px 0px 0px', margin: '20px 20px 0px 0px' }}>
+        <Container key={champion.id}>
+          <Col style={{ padding: '20px 20px 0px 0px', margin: '20px 20px 0px 0px' }}>
             <ChampionCard champion={champion} />
           </Col>
         </Container>

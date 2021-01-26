@@ -9,19 +9,21 @@ const ImageWrapper = styled(Image)`
   align-content: center;
 `;
 
-const PassiveCard = ({ passive }) => {
+const PassiveCard = ({ passive, descriptionSetHandler }) => {
   const { description, image, name } = passive;
 
   return (
     <>
       <ImageWrapper
+        onClick={() => descriptionSetHandler(description)}
         src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/passive/${image.full}`}
       />
       <strong>{name}</strong>
-      <div>{description}</div>
     </>
   );
 };
+
+// passive card should look simmilar to abilitycards,
 
 PassiveCard.defaultProps = {
   passive: {

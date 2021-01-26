@@ -26,7 +26,7 @@ const StyledCol = styled(Col)`
 `;
 
 const OuterContainer = styled(Container)`
-  color: red;
+  color: white;
 `;
 
 const AbilityImageRow = styled(Row)`
@@ -69,8 +69,6 @@ const ChampionDetailScreen = ({ match }) => {
     tags,
     title,
   } = currentChamp;
-
-  console.log(allytips);
 
   return (
     <>
