@@ -28,6 +28,7 @@ const ChampionAbilitySection = ({ passive, abilities }) => {
   };
 
   // Render Methods ->
+  // renders each ability collumn
   const abilityImages = abilities.map(ability => (
     <Col key={ability.id}>
       <Container>
@@ -39,6 +40,8 @@ const ChampionAbilitySection = ({ passive, abilities }) => {
       </Container>
     </Col>
   ));
+
+  // below, render passive then use render method to render each card
 
   return (
     <>
