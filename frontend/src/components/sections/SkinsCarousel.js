@@ -9,8 +9,8 @@ const StyledImageContainer = styled(Image)`
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
-  height: 100%;
+  width: 70%;
+  height: 70%;
 `;
 
 const SkinsCarousel = ({ skins, loading, error, match }) => {
@@ -36,7 +36,7 @@ const SkinsCarousel = ({ skins, loading, error, match }) => {
   };
 
   return (
-    <Carousel animation="false" style={{ height: '55%', width: '55%', margin: 'auto' }}>
+    <Carousel animation="false" style={{ height: '55%', width: '95%', margin: 'auto' }}>
       {carouselItems()}
     </Carousel>
   );

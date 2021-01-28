@@ -4,54 +4,68 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Image, Row, Col, Container } from 'react-bootstrap';
 import styled from 'styled-components';
+import Loader from '../Loader';
 
-import PassiveCard from '../PassiveCard';
-
-const ImageWrapper = styled(Image)`
-  align-content: center;
-`;
-const OverLayRow = styled(Row)`
-  text-align: center;
+const AbilityImage = styled(Image)`
+  background-color: red;
 `;
 
-const ChampionAbilitySection = ({ passive, abilities }) => {
-  const [description, setDescription] = useState('');
+const AbilityCol = styled(Col)``;
 
-  useEffect(() => {
-    if (passive) {
-      setDescription(passive.description);
-    }
-  }, [passive]);
+const OverlayingRow = styled(Row)`
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 
-  const descriptionSetHandler = abilityDescription => {
-    setDescription(abilityDescription);
-  };
+  ${AbilityCol}:hover {
+    transition: var(--transition);
+    background-color: red;
+  }
+`;
 
-  // Render Methods ->
-  // renders each ability collumn
-  const abilityImages = abilities.map(ability => (
-    <Col key={ability.id}>
-      <Container>
-        <h4>{ability.name}</h4>
-        <ImageWrapper
-          onClick={() => descriptionSetHandler(ability.description)}
-          src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${ability.image.full}`}
-        />
-      </Container>
-    </Col>
-  ));
+const ChampionAbilitySection = ({ passive, abilities, loading }) => {
+  console.log(passive, abilities, loading);
 
-  // below, render passive then use render method to render each card
+  // console.log(abilities[0].image.full);
 
   return (
     <>
-      <OverLayRow>
-        <Col>
-          <PassiveCard passive={passive} descriptionSetHandler={descriptionSetHandler} />
-        </Col>
-        {abilityImages}
-      </OverLayRow>
-      <p>{description}</p>
+      {loading || !passive || !abilities ? (
+        <Loader />
+      ) : (
+        <OverlayingRow>
+          <AbilityCol>
+            <AbilityImage
+              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/passive/${passive.image.full}`}
+            />
+            passive
+          </AbilityCol>
+          <AbilityCol>
+            <AbilityImage
+              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${abilities[0].image.full}`}
+            />
+            Q
+          </AbilityCol>
+          <AbilityCol>
+            <AbilityImage
+              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${abilities[1].image.full}`}
+            />
+            W
+          </AbilityCol>
+          <AbilityCol>
+            <AbilityImage
+              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${abilities[2].image.full}`}
+            />
+            E
+          </AbilityCol>
+          <AbilityCol>
+            <AbilityImage
+              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${abilities[3].image.full}`}
+            />
+            R
+          </AbilityCol>
+          <Col md={6}>Description</Col>
+        </OverlayingRow>
+      )}
     </>
   );
 };
