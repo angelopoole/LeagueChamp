@@ -12,7 +12,7 @@ const StyledImageContainer = styled(Image)`
   width: 70%;
   height: 70%;
 `;
-// おはよう
+
 const SkinsCarousel = ({ skins, loading, error, match }) => {
   const paramsChampId = match.params.id;
 
@@ -36,7 +36,7 @@ const SkinsCarousel = ({ skins, loading, error, match }) => {
   };
 
   return (
-    <Carousel animation="false" style={{ height: '55%', width: '95%', margin: 'auto' }}>
+    <Carousel slide={false} fade={false} style={{ height: '55%', width: '95%', margin: 'auto' }}>
       {carouselItems()}
     </Carousel>
   );

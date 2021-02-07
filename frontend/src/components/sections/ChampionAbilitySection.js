@@ -23,8 +23,10 @@ const OverlayingRow = styled(Row)`
 `;
 
 const ChampionAbilitySection = ({ passive, abilities, loading }) => {
-  console.log(passive, abilities, loading);
+  const [description, setDescription] = useState();
 
+  console.log(passive, abilities, loading);
+  // TODO : put ability col's into a render method rather than hardcoding it.
   // console.log(abilities[0].image.full);
 
   return (
@@ -63,7 +65,7 @@ const ChampionAbilitySection = ({ passive, abilities, loading }) => {
             />
             R
           </AbilityCol>
-          <Col md={6}>Description</Col>
+          <Col md={6}>{description}</Col>
         </OverlayingRow>
       )}
     </>
