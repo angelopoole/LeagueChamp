@@ -23,7 +23,16 @@ const OverlayingRow = styled(Row)`
 `;
 
 const ChampionAbilitySection = ({ passive, abilities, loading }) => {
-  const [description, setDescription] = useState();
+  const [description, setDescription] = useState('Loading');
+  useEffect(() => {
+    if (loading === false && passive) {
+      setDescription(passive.description);
+    }
+  }, [loading, passive]);
+
+  const setAbilityDescription = e => {
+    console.log(e.target);
+  };
 
   console.log(passive, abilities, loading);
   // TODO : put ability col's into a render method rather than hardcoding it.
@@ -41,6 +50,7 @@ const ChampionAbilitySection = ({ passive, abilities, loading }) => {
             />
             passive
           </AbilityCol>
+
           <AbilityCol>
             <AbilityImage
               src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${abilities[0].image.full}`}
