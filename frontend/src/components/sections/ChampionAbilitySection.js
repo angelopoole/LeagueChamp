@@ -4,54 +4,74 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Image, Row, Col, Container } from 'react-bootstrap';
 import styled from 'styled-components';
+import Loader from '../Loader';
 
-import PassiveCard from '../PassiveCard';
-
-const ImageWrapper = styled(Image)`
-  align-content: center;
-`;
-const OverLayRow = styled(Row)`
-  text-align: center;
+const AbilityImage = styled(Image)`
+  background-color: red;
 `;
 
-const ChampionAbilitySection = ({ passive, abilities }) => {
-  const [description, setDescription] = useState('');
+const AbilityCol = styled(Col)``;
 
+const OverlayingRow = styled(Row)`
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+  ${AbilityCol}:hover {
+    transition: var(--transition);
+    background-color: red;
+  }
+`;
+
+const ChampionAbilitySection = ({ passive, abilities, loading }) => {
+  const [description, setDescription] = useState({
+    status: 'loading',
+    body: 'loadingBody',
+    name: 'loadingName',
+  });
   useEffect(() => {
-    if (passive) {
-      setDescription(passive.description);
+    if (loading === false && passive) {
+      setDescription({ ...description, body: passive.description, name: passive.name });
     }
-  }, [passive]);
+  }, [loading, passive]);
 
-  const descriptionSetHandler = abilityDescription => {
-    setDescription(abilityDescription);
+  const setAbilityDescription = (abilityDescription, abilityName) => {
+    setDescription({ ...description, body: abilityDescription, name: abilityName });
+    console.log(description);
   };
 
-  // Render Methods ->
-  // renders each ability collumn
-  const abilityImages = abilities.map(ability => (
-    <Col key={ability.id}>
-      <Container>
-        <h4>{ability.name}</h4>
-        <ImageWrapper
-          onClick={() => descriptionSetHandler(ability.description)}
-          src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${ability.image.full}`}
-        />
-      </Container>
-    </Col>
-  ));
-
-  // below, render passive then use render method to render each card
+  console.log(passive, abilities, loading);
 
   return (
     <>
-      <OverLayRow>
-        <Col>
-          <PassiveCard passive={passive} descriptionSetHandler={descriptionSetHandler} />
-        </Col>
-        {abilityImages}
-      </OverLayRow>
-      <p>{description}</p>
+      {loading || !passive || !abilities ? (
+        <Loader />
+      ) : (
+        <OverlayingRow>
+          <AbilityCol onClick={() => setAbilityDescription(passive.description, passive.name)}>
+            <AbilityImage
+              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/passive/${passive.image.full}`}
+            />
+            passive
+          </AbilityCol>
+          {abilities.map(ability => {
+            return (
+              <AbilityCol
+                key={ability.name}
+                onClick={() => setAbilityDescription(ability.description, ability.name)}>
+                <AbilityImage
+                  src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${ability.image.full}`}
+                />
+                {ability.id.slice(-1)}
+              </AbilityCol>
+            );
+          })}
+
+          <Col md={6}>
+            {description.name} <br />
+            {description.body}
+          </Col>
+        </OverlayingRow>
+      )}
     </>
   );
 };

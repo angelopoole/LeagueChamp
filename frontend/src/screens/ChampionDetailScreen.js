@@ -16,6 +16,18 @@ import { getChampionById } from '../Redux/Actions/championAction';
 
 // styled Components
 
+const ChampionHeader = styled.h1`
+  margin: auto;
+  margin-bottom: 50px;
+  margin-top: -80px;
+  width: 50%;
+  text-align: center;
+  color: gold;
+  font-style: italic;
+  background-color: rgba(0, 0, 0, 0.13);
+  border-radius: var(--border-radius);
+`;
+
 const StyledCol = styled(Col)`
   background-color: var(--gray-dark);
   border-radius: var(--border-radius);
@@ -73,12 +85,15 @@ const ChampionDetailScreen = ({ match }) => {
   return (
     <>
       <ChampionHero id={id} />
+      <ChampionHeader>
+        <Col>
+          {name} <br />
+          {title}
+        </Col>
+      </ChampionHeader>
       <SkinsCarousel key={key} skins={skins} loading={loading} error={error} match={match} />
       <OuterContainer>
-        <Row style={{ margin: 'auto', width: '50%', textAlign: 'center' }}>
-          <Col>{title}</Col>
-        </Row>
-        <ChampionAbilitySection key={key} passive={passive} abilities={spells} />
+        <ChampionAbilitySection key={key} passive={passive} abilities={spells} loading={loading} />
 
         <Row>
           <StyledCol className="tips">{name}</StyledCol>
