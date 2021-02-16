@@ -16,8 +16,8 @@ app.use('/api/datadragon/champions', dataDragonRoutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(
-	PORT,
-	console.log(
-		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-	)
+  PORT,
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold),
 );
+
+// fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(r => r.json()).then(d => console.log(d[0]))

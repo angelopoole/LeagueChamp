@@ -9,8 +9,14 @@ import axios from 'axios';
 // @access  Public
 
 const getAllChampionData = async (req, res) => {
+  const versionHistory = await axios.get('https://ddragon.leagueoflegends.com/api/versions.json');
+
+  const latestVersion = versionHistory.data[0];
+
+  // fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(r => r.json()).then(d => console.log(d[0]))
+
   const data = await axios.get(
-    'https://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/champion.json',
+    `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`,
   );
 
   const newArrayDataOfOjbect = Object.values(data.data.data);
@@ -19,6 +25,7 @@ const getAllChampionData = async (req, res) => {
 };
 
 // @desc     Get one champion
+
 // @route    GET /api/dataDragon/:id
 // @access   public
 
