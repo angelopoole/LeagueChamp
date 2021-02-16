@@ -54,7 +54,8 @@ const ChampionDetailScreen = ({ match }) => {
   const dispatch = useDispatch();
   const paramsChampId = match.params.id;
   const currentChampion = useSelector(state => state.championDetails);
-  const { error, loading, currentChamp } = currentChampion;
+
+  const { error, loading, currentChamp, version } = currentChampion;
 
   useEffect(() => {
     if (!currentChamp.key || currentChamp.id !== paramsChampId) {
@@ -82,6 +83,7 @@ const ChampionDetailScreen = ({ match }) => {
     title,
   } = currentChamp;
 
+  console.log(version);
   return (
     <>
       <ChampionHero id={id} />
@@ -93,23 +95,39 @@ const ChampionDetailScreen = ({ match }) => {
       </ChampionHeader>
       <SkinsCarousel key={key} skins={skins} loading={loading} error={error} match={match} />
       <OuterContainer>
-        <ChampionAbilitySection key={key} passive={passive} abilities={spells} loading={loading} />
+        <ChampionAbilitySection
+          key={key}
+          passive={passive}
+          abilities={spells}
+          loading={loading}
+          version={version}
+        />
 
         <Row>
           <StyledCol className="tips">{name}</StyledCol>
         </Row>
         <Row>
           <StyledCol className="tips">
-            <strong>Enemy Tips</strong>
-            {allytips.map(tip => (
-              <Row key={allytips.indexOf(tip)}>--{tip}</Row>
-            ))}
+            {allytips[-1] ? (
+              <strong>no tips here</strong>
+            ) : (
+              allytips.map(tip => (
+                <>
+                  <Row key={allytips.indexOf(tip)}> 🟢{tip}</Row> <br />
+                </>
+              ))
+            )}
           </StyledCol>
           <StyledCol className="tips" style={{ borderStyle: 'none none none solid' }}>
-            <strong>Ally tips</strong>
-            {enemytips.map(tip => (
-              <Row key={enemytips.indexOf(tip)}> --{tip}</Row>
-            ))}
+            {enemytips[-1] ? (
+              <strong>no tips here</strong>
+            ) : (
+              enemytips.map(tip => (
+                <>
+                  <Row key={enemytips.indexOf(tip)}> 🔴{tip}</Row> <br />
+                </>
+              ))
+            )}
           </StyledCol>
         </Row>
       </OuterContainer>

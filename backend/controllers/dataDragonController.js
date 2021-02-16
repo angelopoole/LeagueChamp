@@ -30,15 +30,19 @@ const getAllChampionData = async (req, res) => {
 // @access   public
 
 const getChampionById = async (req, res) => {
+  const versionHistory = await axios.get('https://ddragon.leagueoflegends.com/api/versions.json');
+
+  const latestVersion = versionHistory.data[0];
+
   try {
     const champIdCapitalized = (await req.params.id[0].toUpperCase()) + req.params.id.slice(1);
 
     const { data } = await axios.get(
-      `https://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/champion/${champIdCapitalized}.json`,
+      `https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion/${champIdCapitalized}.json`,
     );
 
     const key = Object.keys(data.data)[0];
-    const formattedData = data.data[key];
+    const formattedData = { data: data.data[key], version: latestVersion };
 
     res.send(formattedData);
   } catch (error) {

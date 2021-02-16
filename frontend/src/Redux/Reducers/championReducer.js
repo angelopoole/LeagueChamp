@@ -33,9 +33,10 @@ export const championDetailsReducer = (
       return {
         loading: true,
         currentChamp: { skins: [], spells: [], enemytips: [], allytips: [] },
+        version: '',
       };
     case GET_CHAMPION_BY_ID_SUCCESS:
-      return { loading: false, currentChamp: payload };
+      return { loading: false, currentChamp: payload.data, version: payload.version };
     case GET_CHAMPION_BY_ID_FAIL:
       return { loading: false, error: payload };
 

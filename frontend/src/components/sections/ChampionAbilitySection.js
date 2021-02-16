@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Image, Row, Col, Container } from 'react-bootstrap';
 import styled from 'styled-components';
+
 import Loader from '../Loader';
 
 const AbilityImage = styled(Image)`
@@ -22,7 +23,7 @@ const OverlayingRow = styled(Row)`
   }
 `;
 
-const ChampionAbilitySection = ({ passive, abilities, loading }) => {
+const ChampionAbilitySection = ({ passive, abilities, loading, version }) => {
   const [description, setDescription] = useState({
     status: 'loading',
     body: 'loadingBody',
@@ -49,9 +50,9 @@ const ChampionAbilitySection = ({ passive, abilities, loading }) => {
         <OverlayingRow>
           <AbilityCol onClick={() => setAbilityDescription(passive.description, passive.name)}>
             <AbilityImage
-              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/passive/${passive.image.full}`}
+              src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${passive.image.full}`}
             />
-            passive
+            <h5>passive</h5>
           </AbilityCol>
           {abilities.map(ability => {
             return (
@@ -59,9 +60,9 @@ const ChampionAbilitySection = ({ passive, abilities, loading }) => {
                 key={ability.name}
                 onClick={() => setAbilityDescription(ability.description, ability.name)}>
                 <AbilityImage
-                  src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${ability.image.full}`}
+                  src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${ability.image.full}`}
                 />
-                {ability.id.slice(-1)}
+                <h5>{ability.id.slice(-1)}</h5>
               </AbilityCol>
             );
           })}
