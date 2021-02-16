@@ -23,20 +23,23 @@ const OverlayingRow = styled(Row)`
 `;
 
 const ChampionAbilitySection = ({ passive, abilities, loading }) => {
-  const [description, setDescription] = useState('Loading');
+  const [description, setDescription] = useState({
+    status: 'loading',
+    body: 'loadingBody',
+    name: 'loadingName',
+  });
   useEffect(() => {
     if (loading === false && passive) {
-      setDescription(passive.description);
+      setDescription({ ...description, body: passive.description, name: passive.name });
     }
   }, [loading, passive]);
 
-  const setAbilityDescription = e => {
-    console.log(e.target);
+  const setAbilityDescription = (abilityDescription, abilityName) => {
+    setDescription({ ...description, body: abilityDescription, name: abilityName });
+    console.log(description);
   };
 
   console.log(passive, abilities, loading);
-  // TODO : put ability col's into a render method rather than hardcoding it.
-  // console.log(abilities[0].image.full);
 
   return (
     <>
@@ -44,38 +47,29 @@ const ChampionAbilitySection = ({ passive, abilities, loading }) => {
         <Loader />
       ) : (
         <OverlayingRow>
-          <AbilityCol>
+          <AbilityCol onClick={() => setAbilityDescription(passive.description, passive.name)}>
             <AbilityImage
               src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/passive/${passive.image.full}`}
             />
             passive
           </AbilityCol>
+          {abilities.map(ability => {
+            return (
+              <AbilityCol
+                key={ability.name}
+                onClick={() => setAbilityDescription(ability.description, ability.name)}>
+                <AbilityImage
+                  src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${ability.image.full}`}
+                />
+                {ability.id.slice(-1)}
+              </AbilityCol>
+            );
+          })}
 
-          <AbilityCol>
-            <AbilityImage
-              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${abilities[0].image.full}`}
-            />
-            Q
-          </AbilityCol>
-          <AbilityCol>
-            <AbilityImage
-              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${abilities[1].image.full}`}
-            />
-            W
-          </AbilityCol>
-          <AbilityCol>
-            <AbilityImage
-              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${abilities[2].image.full}`}
-            />
-            E
-          </AbilityCol>
-          <AbilityCol>
-            <AbilityImage
-              src={`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/spell/${abilities[3].image.full}`}
-            />
-            R
-          </AbilityCol>
-          <Col md={6}>{description}</Col>
+          <Col md={6}>
+            {description.name} <br />
+            {description.body}
+          </Col>
         </OverlayingRow>
       )}
     </>
