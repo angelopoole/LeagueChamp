@@ -95,7 +95,7 @@ const ChampionHero = id => (
       <BackgroundAsset>
         <StyledBackgroundImage>
           <StyledBackgroundImagePure
-            src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id.id}_0.jpg`}
+            src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id.id}_0.jpg`}
             alt={id.id}
           />
         </StyledBackgroundImage>
@@ -110,7 +110,7 @@ const ChampionHero = id => (
       <StyleSectionInner>
         <StyleForegroundAsset>
           <StyleForegroundAssetPure
-            src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id.id}_0.jpg`}
+            src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id.id}_0.jpg`}
             alt={id.id}
           />
         </StyleForegroundAsset>

@@ -47,7 +47,7 @@ const ChampionAbilitySection = ({ passive, abilities, loading, version }) => {
         <OverlayingRow>
           <AbilityCol onClick={() => setAbilityDescription(passive.description, passive.name)}>
             <AbilityImage
-              src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${passive.image.full}`}
+              src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${passive.image.full}`}
             />
             <h5>passive</h5>
           </AbilityCol>
@@ -57,7 +57,7 @@ const ChampionAbilitySection = ({ passive, abilities, loading, version }) => {
                 key={ability.name}
                 onClick={() => setAbilityDescription(ability.description, ability.name)}>
                 <AbilityImage
-                  src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${ability.image.full}`}
+                  src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${ability.image.full}`}
                 />
                 <h5>{ability.id.slice(-1)}</h5>
               </AbilityCol>
