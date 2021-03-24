@@ -26,7 +26,7 @@ const SkinsCarousel = ({ skins, loading, error, match }) => {
       items = skins.map(skin => (
         <Carousel.Item key={skin.id}>
           <StyledImageContainer
-            src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${paramsChampId}_${skin.num}.jpg`}
+            src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${paramsChampId}_${skin.num}.jpg`}
           />
           <Carousel.Caption> {skin.name}! </Carousel.Caption>
         </Carousel.Item>
