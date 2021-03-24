@@ -83,7 +83,6 @@ const ChampionDetailScreen = ({ match }) => {
     title,
   } = currentChamp;
 
-  console.log(version);
   return (
     <>
       <ChampionHero id={id} />

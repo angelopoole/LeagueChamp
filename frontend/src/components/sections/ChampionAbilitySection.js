@@ -37,10 +37,7 @@ const ChampionAbilitySection = ({ passive, abilities, loading, version }) => {
 
   const setAbilityDescription = (abilityDescription, abilityName) => {
     setDescription({ ...description, body: abilityDescription, name: abilityName });
-    console.log(description);
   };
-
-  console.log(passive, abilities, loading);
 
   return (
     <>
